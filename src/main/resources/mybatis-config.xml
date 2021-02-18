@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.scmaster.gittest.vo.Review" alias="Review" />
+		<typeAlias type="com.scmaster.gittest.vo.Clip" alias="Clip" />
+		<typeAlias type="com.scmaster.gittest.vo.User" alias="User" />
+		<typeAlias type="com.scmaster.gittest.vo.Schedule" alias="Schedule" />
+		<typeAlias type="com.scmaster.gittest.vo.Daily_City" alias="Daily_City" />
+		<typeAlias type="com.scmaster.gittest.vo.Daily_Scd" alias="Daily_Scd" />
+		<typeAlias type="com.scmaster.gittest.vo.Dtl_Scd" alias="Dtl_Scd" />
+		<typeAlias type="com.scmaster.gittest.vo.Budget" alias="Budget" />
+		<typeAlias type="com.scmaster.gittest.vo.Liked" alias="Liked" />
+		<typeAlias type="com.scmaster.gittest.vo.Shared_Scd" alias="Shared_Scd" />
+		<typeAlias type="com.scmaster.gittest.vo.Reply" alias="Reply" />
+		<!-- <typeAlias type="com.bong.maptest.vo.Countent" alias="Countent" /> -->
+	</typeAliases>
+	<mappers>
+		<mapper resource="mappers/ReviewMapper.xml" />
+		<mapper resource="mappers/ClipMapper.xml" />
+		<mapper resource="mappers/scheduleMapper.xml" />
+	    <mapper resource="mappers/UserMapper.xml" />
+	    <mapper resource="mappers/MyScheduleMapper.xml" />
+	    <mapper resource="mappers/ShareMapper.xml" />
+	    <mapper resource="mappers/SearchSchedule.xml" /> 
+	    <mapper resource="mappers/ReplyMapper.xml" />
+	</mappers>
+</configuration>

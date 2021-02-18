@@ -1,0 +1,314 @@
+@CHARSET "UTF-8";
+
+.map {
+	
+	width : 220px;
+	height: 220px;
+	overflow: hidden;
+	margin: auto;
+} 
+.page.show {
+    display: block;
+}
+plan_sub.css:477
+.page {
+    margin-top: 30px;
+    padding-bottom: 60px;
+    display: none;
+}
+gnb.css?v=150805:63
+.wrap {
+    width: 1092px;
+    margin: 0 auto;
+    position: relative;
+}
+table {
+    border-collapse: collapse;
+}
+
+/* *{
+    font-family: '나눔바른고딕',NanumBarunGothic,'nanum','돋움',Dotum,'맑은고딕','Malgun Gothic','굴림',Gulim,Helvetica,sans-serif;
+} */
+user agent stylesheet
+colgroup {
+    display: table-column-group;
+}
+
+col[Attributes Style] {
+    width: 20%;
+}
+col {
+    display: table-column;
+}
+
+
+.sch_table th {
+    background: #203341;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    height: 50px;
+    line-height: 50px;
+    border-right: 1px solid #374854;
+}
+.sch_table th div {
+    display: inline-block;
+    margin: 0 auto;
+}
+.sch_table th img {
+    float: left;
+    margin-top: 17px;
+    margin-right: 3px;
+}
+.sch_table th div {
+    display: inline-block;
+    margin: 0 auto;
+}
+reset.css?v=150805:62
+.clear {
+    clear: both;
+}
+
+.sch_table tr.white td {
+    background: white;
+}
+
+plan_sub.css:1002
+.sch_table td {
+    border-left: 1px solid #c8c8ca;
+    border-right: 1px solid #c8c8ca;
+    border-bottom: 1px solid #c8c8ca;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+plan_sub.css:1071
+.scht_vtop {
+    vertical-align: top;
+}
+
+
+.sch_table td {
+    border-left: 1px solid #c8c8ca;
+    border-right: 1px solid #c8c8ca;
+    border-bottom: 1px solid #c8c8ca;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.plan-menu{
+	text-align: right;
+}
+
+/* 폰트 css  */
+
+/* 날짜  */
+.scht_date {
+    font-size: 22px;
+    color: #555555;
+    font-weight: bold;
+    text-align: center;
+}
+
+.scht_day {
+    font-size: 22px;
+    color: #1a7ad9;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 17px;
+}
+/* 도시 */
+.scht_city {
+    padding-left: 15px;
+    font-size: 18px;
+    color: #555555;
+    font-weight: bold;
+    background: url(/res/img/mypage/plan/sub/scht_cityblit.png) no-repeat center left;
+}
+.scht_city_en {
+    padding-left: 15px;
+    font-size: 14px;
+    color: #b3b3b3;
+    font-weight: bold;
+    padding-top: 8px;
+}
+/* 일정  */
+.scht_spotname {
+    font-size: 15px;
+    color: #808080;
+    line-height: 24px;
+}
+
+/* .jumbotron {
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+	margin-bottom: 150px;
+	background-color: #fff;
+	background: url(./resources/image/otherpage/sc_10.png) no-repeat center left;
+} */
+
+.text-center {
+    text-align: center!important;
+}
+
+/* 모바일 Device : 0 ~ 640 */
+@media screen and (max-width: 640px){
+	.jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 20rem;
+    margin-bottom: 0px;
+    background-color: #fff;
+   /*  background: url(../image/otherpage/111.png); */
+    width:100%;
+    height:440px; 
+    position:relative;
+    vertical-align: middle;
+    border: 0;
+}  
+ 
+} 
+
+/* Tablet Device : 641 ~ 768 */
+ @media screen and (min-width:641px){
+ 	.jumbotron {
+   padding-top: 6rem;
+    padding-bottom: 20rem;
+    margin-bottom: 0px;
+    background-color: #fff;
+  /*  background: url(../image/otherpage/111.png); */
+    position:relative;
+    height: 100%; 
+    width: 100%; 
+} 
+}
+
+/* Desktop Device : 1024 이상 */
+@media screen and (min-width:1024px){
+ .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 20rem;
+    margin-bottom: 0px;
+    background-color: #fff;
+   /* background: url(../image/otherpage/111.png); */
+    width:100%;
+    height:600px; 
+    position:relative;
+    height: 100%; 
+    width: 100%;
+} 
+}
+
+.page-title {
+    text-align: center;
+}
+
+.page-title > * {
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.page-title .page-title-inner {
+    position: relative;
+    display: inline-block;
+}
+
+.page-title .page-title-left,
+.page-title .page-title-right {
+    position: absolute;
+    top: 20%;
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.page-title .page-title-left *,
+.page-title .page-title-right * {
+    display: inline;
+    white-space: nowrap;
+}
+
+.page-title .page-title-left {
+    left: 0;
+    text-align: right;
+    -webkit-transform: translate(-100%, -50%);
+    transform: translate(-100%, -50%);
+}
+
+.page-title .page-title-left * {
+    padding-right: .25em;
+}
+
+.page-title .page-title-left *:nth-last-child(odd) {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.page-title .page-title-left *:nth-last-child(even) {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.page-title .page-title-right {
+    right: 0;
+    text-align: left;
+    -webkit-transform: translate(100%, -50%);
+    transform: translate(100%, -50%);
+}
+
+.page-title .page-title-right * {
+    padding-left: .25em;
+}
+
+.page-title .page-title-right *:nth-child(odd) {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.page-title .page-title-right *:nth-child(even) {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.page-title-wrap {
+    background: #000;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center 80%;
+}
+
+@media (min-width: 768px) {
+    .page-title {
+        text-align: center;
+    }
+}
+
+
+/* .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 20rem;
+    margin-bottom: 0px;
+    background-color: #fff;
+    background: url(../image/otherpage/111.png);
+    width:100%;
+    height:600px; 
+    position:relative;
+    height: 100%; 
+    width: 100%;
+}  */
+
+
+
+/* .jumbotron {
+    padding: 4rem 2rem;
+} */
+/* .jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #eceeef;
+    border-radius: .3rem;
+    background: url(../image/otherpage/sc_10.png) no-repeat center left;
+} */
+.pull-left{
+	padding-top: 20px;
+}

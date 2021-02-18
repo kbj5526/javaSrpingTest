@@ -1,0 +1,102 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css); 
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css); 
+@CHARSET "UTF-8";
+
+.map {
+	
+	width : 220px;
+	height: 220px;
+	overflow: hidden;
+	margin: auto;
+}
+.form-control{
+	resize: none;
+}
+
+.rplace1{
+	width: 225px;
+	height : 80px;
+	float: left;	
+}
+.rplaceImg1{
+	width: 65px;
+	height :65px;
+	float: left;
+}
+.rplace2{
+	width: 225px;
+	height : 80px;
+	float: left; 
+}
+.rplaceImg2{
+	width: 65px;
+	height :65px;
+	float: left;
+}
+
+.rplace3{
+	width: 225px;
+	height : 80px;
+	overflow :hidden;	
+}
+.rplaceImg3{
+	width: 65px;
+	height :65px;
+	float: left;
+}
+.eventInfo{
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .pInfo-div {
+    font-size: 15px;
+  }
+}
+.eventDate{
+	width: 610px;
+	
+	
+	
+}
+.addr{
+	float: right;
+	
+	
+}
+.col-lg-8, col-md-4{
+	padding-top: 20px;
+}
+.img-responsive{
+	text-align: center;
+}
+
+pre{
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 17px;
+    line-height: 1;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	white-space: pre-line;
+}
+
+.col-lg-8 {
+	/* font-family: 'Nanum Pen Script', cursive; */
+	font-family: 'Nanum Gothic Coding', monospace; 
+}
+
+#placeImg {
+	border-radius : 10px;
+}
+.pull-left{
+	padding-top: 20px;
+}

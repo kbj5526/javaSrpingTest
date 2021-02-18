@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scmaster.gittest.dao.ScheduleMapper">
+	
+	<!-- 메인 스케줄 저장 -->
+	<insert id="insert_scd" parameterType="Schedule">
+		insert into
+			SM_SCD_TB(
+				scd_sq
+				,user_id
+				,scd_title
+				,scd_desc
+				,scd_season
+				,scd_theme
+				,public_fl
+				,start_ymd
+				,day_cnt
+			)values(
+				SM_SCD_TB_SCD_SQ.nextval
+				,#{user_id}
+				,#{scd_title}
+				,#{scd_desc}
+				,#{scd_season}
+				,#{scd_theme}
+				,#{public_fl}
+				,#{start_ymd}
+				,#{day_cnt}
+			)
+	</insert>
+	
+	<!-- 메인 스케줄 수정 -->
+	<update id="update_scd_info" parameterType="Schedule">
+		update
+			SM_SCD_TB
+		set
+			scd_title = #{scd_title}
+			,scd_desc = #{scd_desc}
+			,scd_season = #{scd_season}
+			,scd_theme = #{scd_theme}
+			,public_fl = #{public_fl}
+			,start_ymd = #{start_ymd}
+			,day_cnt = #{day_cnt}
+		where
+ 			scd_sq = #{scd_sq}
+	</update>
+	
+	<!-- scd_sq 가져오기 -->
+	<select id="get_shared_users" parameterType="int" resultType="HashMap">
+		select
+			user_id
+		from
+			SM_SHARED_USER_TB
+		where
+			scd_sq = #{scd_sq}
+	</select>
+	
+	<!-- shared users 가져오기 -->
+	<select id="getScd_Sq" parameterType="string" resultType="int">
+		select
+			max(scd_sq)
+		from
+			SM_SCD_TB
+		where
+			user_id = #{user_id}
+	</select>
+	
+	<!-- scd 가져오기 -->
+	<select id="select_scd" parameterType="int" resultType="Schedule">
+		select
+			*
+		from
+			SM_SCD_TB
+		where
+ 			scd_sq = #{scd_sq}
+	</select>
+	
+	<!-- 메인 스케줄 title 수정 -->
+	<update id="update_scd" parameterType="Schedule">
+		update
+			SM_SCD_TB
+		set
+			scd_title = #{scd_title}
+		where
+ 			scd_sq = #{scd_sq}
+	</update>
+	
+	<!-- 스케줄 삭제 -->
+	<delete id="delete_scd" parameterType="int">
+ 		delete from
+ 			SM_SCD_TB
+ 		where
+ 			scd_sq = #{scd_sq}
+ 	</delete>
+	
+	<!-- 메인 스케줄 시작일 수정 -->
+	<update id="edit_start_ymd" parameterType="Schedule">
+		update
+			SM_SCD_TB
+		set
+			start_ymd = #{start_ymd}
+			,day_cnt = #{day_cnt}
+		where
+ 			scd_sq = #{scd_sq}
+	</update>
+	
+	<!-- 일차 스케줄 저장 -->
+	<insert id="insert_daily" parameterType="Daily_Scd">
+		insert into
+			SM_DAILY_SCD_TB(
+				daily_sq
+				,scd_sq
+				,daily_ord
+				,daily_ymd
+			)values(
+				SM_DAILY_SCD_TB_DAILY_SQ.nextval
+				,#{scd_sq}
+				,#{daily_ord}
+				,#{daily_ymd}
+			)
+	</insert>
+	
+	<!-- daily_sq 가져오기 -->
+	<select id="getDaily" parameterType="Daily_Scd" resultType="int">
+		select
+			daily_sq
+		from
+			SM_DAILY_SCD_TB
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_ord = #{daily_ord}
+	</select>
+	
+	<!-- 도시 테이블에 저장 -->
+	<insert id="insert_city" parameterType="Daily_Scd">
+		insert into
+			SM_DAILY_CITY_TB(
+				dcl_sq
+				,scd_sq
+				,daily_sq
+				,city_ord
+				,area_code
+				,sigungu_code
+				,city_nm
+			)values(
+				SM_DAILY_CITY_TB_DCL_SQ.nextval
+				,#{scd_sq}
+				,#{daily_sq}
+				,#{city_ord}
+				,#{area_code}
+				,#{sigungu_code}
+				,#{city_nm}
+			)
+	</insert>
+	
+	<!-- 일차정보 가져오기 -->
+	<select id="getDailyList" parameterType="int" resultType="HashMap">
+		select 
+			s.daily_sq, s.scd_sq, s.daily_ord, to_char(s.daily_ymd, 'YYYY-MM-DD') daily_ymd, c.area_code, c.sigungu_code, c.city_ord, c.city_nm
+		from 
+			sm_daily_scd_tb s, 
+		(
+			select 
+				daily_sq, city_ord, area_code, sigungu_code, city_nm
+			from 
+				sm_daily_city_tb
+			where 
+				city_ord = '1') c
+		where 
+			scd_sq = #{scd_sq}
+		and 
+			s.daily_sq = c.daily_sq
+		order by 
+			daily_ord
+	</select>
+	
+	<!-- 추가한 장소 저장 -->
+	<insert id="insert_dtl" parameterType="Dtl_Scd">
+		insert into
+			SM_DTL_SCD_TB(
+				dtl_sq
+				,scd_sq
+				,daily_sq
+				,dtl_ord
+				,dtl_content_id
+				,place_nm
+				,dtl_image
+				,area_code
+				,sigungu_code
+				,city_nm
+				,map_x
+				,map_y
+			)values(
+				SM_DTL_SCD_TB_DTL_SQ.nextval
+				,#{scd_sq}
+				,#{daily_sq}
+				,#{dtl_ord}
+				,#{dtl_content_id}
+				,#{place_nm}
+				,#{dtl_image}
+				,#{area_code}
+				,#{sigungu_code}
+				,#{city_nm}
+				,#{map_x}
+				,#{map_y}
+			)
+	</insert>
+	
+	<!-- dtl_sq 가져오기 -->
+	<select id="getDtlsq" parameterType="Dtl_Scd" resultType="int">
+		select
+			dtl_sq
+		from
+			SM_DTL_SCD_TB
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_sq = #{daily_sq}
+		and
+			dtl_ord = #{dtl_ord}
+	</select>
+	
+	<!-- 일차별 추가한 장소리스트 가져오기 -->
+	<select id="getDtlList" parameterType="Dtl_Scd" resultType="HashMap">
+		select
+			*
+		from
+			SM_DTL_SCD_TB
+		where
+			scd_sq = #{scd_sq}
+		and 
+			daily_sq = #{daily_sq}
+		order by
+			dtl_ord
+	</select>
+	
+	<!-- 장소 순서 변경 -->
+	<update id="sort_change" parameterType="Dtl_Scd">
+		update
+			SM_DTL_SCD_TB
+		set
+			dtl_ord = #{dtl_ord}
+		where
+			dtl_sq = #{dtl_sq}
+	</update>
+	
+	<!-- 장소 삭제 -->
+	<delete id="delete_place" parameterType="int">
+ 		delete from
+ 			SM_DTL_SCD_TB
+ 		where
+ 			dtl_sq = #{dtl_sq}
+ 	</delete>
+ 	
+ 	<!-- daily_sq 가져오기 -->
+	<select id="getDailySq" parameterType="Daily_City" resultType="int">
+		select
+			daily_sq
+		from
+			SM_DAILY_SCD_TB
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_ord = #{daily_sq}
+	</select>
+ 	
+ 	<!-- city_cnt 가져오기 -->
+	<select id="getDcityCnt" parameterType="Daily_City" resultType="int">
+		select
+			count(dcl_sq)
+		from
+			SM_DAILY_CITY_TB
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_sq = #{daily_sq}
+	</select>
+ 	
+ 	<!-- max city_ord 가져오기 -->
+	<select id="getMaxCityord" parameterType="Daily_City" resultType="int">
+		select
+			max(city_ord)
+		from
+			SM_DAILY_CITY_TB
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_sq = #{daily_sq}
+	</select>
+ 	
+ 	<!-- 일차별 도시 삭제 -->
+	<delete id="delete_dcity" parameterType="Daily_City">
+ 		delete from
+ 			SM_DAILY_CITY_TB
+ 		where
+ 			scd_sq = #{scd_sq}
+ 		and
+ 			daily_sq = #{daily_sq}
+ 		and
+ 			city_ord = #{max_ord}
+ 	</delete>
+ 	
+ 	<!-- 일차별 도시 수정 -->
+	<update id="update_dcity" parameterType="Daily_City">
+		update
+			SM_DAILY_CITY_TB
+		set
+			area_code = #{area_code}
+			,sigungu_code = #{sigungu_code}
+			,city_nm = #{city_nm}
+		where
+ 			scd_sq = #{scd_sq}
+ 		and
+ 			daily_sq = #{daily_sq}
+ 		and
+ 			city_ord = #{city_ord}
+	</update>
+	
+	<!-- 일차별 도시 추가 -->
+	<insert id="insert_dcity" parameterType="Daily_City">
+		insert into
+			SM_DAILY_CITY_TB(
+				dcl_sq
+				,scd_sq
+				,daily_sq
+				,city_ord
+				,area_code
+				,sigungu_code
+				,city_nm
+			)values(
+				SM_DAILY_CITY_TB_DCL_SQ.nextval
+				,#{scd_sq}
+				,#{daily_sq}
+				,#{city_ord}
+				,#{area_code}
+				,#{sigungu_code}
+				,#{city_nm}
+			)
+	</insert>
+	
+	<!-- budget/memo 가져오기 -->
+	<select id="getBudgetMemo" parameterType="int" resultType="Budget">
+		select
+			b.dtl_sq, b.dtl_budget, d.dtl_memo
+		from
+			SM_DTL_SCD_TB d, SM_BGT_TB b
+		where
+			d.dtl_sq = b.dtl_sq
+		and
+			d.dtl_sq = #{dtl_sq}
+	</select>
+	
+	<!-- budget data 유무확인 -->
+	<select id="getBgtUpdateCheck" parameterType="Budget" resultType="int">
+		select
+			count(bgt_sq)
+		from
+			SM_BGT_TB
+		where
+			dtl_sq = #{dtl_sq}
+	</select>
+	
+	<!-- budget 신규등록 -->
+	<insert id="insert_bgt" parameterType="Budget">
+		insert into
+			SM_BGT_TB(
+				bgt_sq
+				,scd_sq
+				,daily_sq
+				,dtl_sq
+				<if test="dtl_budget != null">
+				,dtl_budget
+				</if>
+			)values(
+				SM_BGT_TB_BGT_SQ.nextval
+				,#{scd_sq}
+				,#{daily_sq}
+				,#{dtl_sq}
+				<if test="dtl_budget != null">
+				,#{dtl_budget}
+				</if>
+			)
+	</insert>
+	
+	<!-- budget 수정 -->
+	<update id="update_bgt" parameterType="Budget">
+		update
+			SM_BGT_TB
+		set
+			dtl_budget = #{dtl_budget}
+		where
+ 			scd_sq = #{scd_sq}
+ 		and
+ 			daily_sq = #{daily_sq}
+ 		and
+ 			dtl_sq = #{dtl_sq}
+	</update>
+	
+	<!-- memo 수정 -->
+	<update id="update_memo" parameterType="Budget">
+		update
+			SM_DTL_SCD_TB
+		set
+			dtl_memo = #{dtl_memo}
+		where
+ 			scd_sq = #{scd_sq}
+ 		and
+ 			daily_sq = #{daily_sq}
+ 		and
+ 			dtl_sq = #{dtl_sq}
+	</update>
+	
+	<!-- 일차별 예산 가져오기 -->
+	<select id="get_daily_budget" parameterType="Budget" resultType="Budget">
+		select
+			sum(dtl_budget) dtl_budget
+		from
+			SM_BGT_TB
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_sq = #{daily_sq}
+	</select>
+	
+	<!-- 일정 총 예산 가져오기 -->
+	<select id="get_budget_total" parameterType="Budget" resultType="Budget">
+		select
+			sum(dtl_budget) dtl_budget
+		from
+			SM_BGT_TB
+		where
+			scd_sq = #{scd_sq}
+	</select>
+	
+ 	<!-- daily list 가져오기 -->
+	<select id="get_daily_list" parameterType="int" resultType="Hashmap">
+		select
+			daily_sq, scd_sq, daily_ord, to_char(daily_ymd, 'YYYY-MM-DD') daily_ymd
+		from
+			SM_DAILY_SCD_TB
+		where
+			scd_sq = #{scd_sq}
+		order by
+			daily_ord
+	</select>
+	
+ 	<!-- daily city list 가져오기 -->
+	<select id="get_city_list" parameterType="int" resultType="Hashmap">
+		select
+			city_nm
+		from
+			SM_DAILY_CITY_TB
+		where
+			daily_sq = #{daily_sq}
+		order by
+			city_ord
+	</select>
+	
+	
+ 	<!-- daily city list 가져오기 All -->
+	<select id="get_city_listAll" parameterType="int" resultType="Hashmap">
+		select
+			*
+		from
+			SM_DAILY_CITY_TB
+		where
+			daily_sq = #{daily_sq}
+		order by
+			city_ord
+	</select>
+	
+	<!-- 일자 삭제 -->
+	<delete id="delete_day" parameterType="int">
+ 		delete from
+ 			SM_DAILY_SCD_TB
+ 		where
+ 			daily_sq = #{daily_sq}
+ 	</delete>
+ 	
+	<!-- 일차 순서 변경 -->
+	<update id="day_sort_change" parameterType="Daily_Scd">
+		update
+			SM_DAILY_SCD_TB
+		set
+			daily_ord = #{daily_ord}
+		where
+			daily_sq = #{daily_sq}
+	</update>
+ 	
+	<!-- 일차 날자 변경 -->
+	<update id="day_change" parameterType="Daily_Scd">
+		update
+			SM_DAILY_SCD_TB
+		set
+			daily_ymd = #{daily_ymd}
+		where
+			scd_sq = #{scd_sq}
+		and
+			daily_ord = #{daily_ord}
+	</update>
+	
+	<!-- 클립 읽어오기 -->		
+	<select id="get_cliplist" parameterType="String" resultType="Hashmap">
+		select	
+			clip_sq, user_id, content_id, content_type_id, clip_ymd 
+		from 	
+			SM_CLIP_TB
+		where 	
+			user_id = #{user_id}
+		order by 
+			clip_sq
+	</select>
+	
+ </mapper>
